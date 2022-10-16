@@ -27,8 +27,8 @@ public class UserServiceImpl implements UserService {
                 .collect(Collectors.toList());
 
         log(users, "Original");
-        log(filteredUsers, "Filtered");
-        log(sortedUsers, "Sorted");
-        log(integerList, "RowSum");
+//        log(filteredUsers, "Filtered");
+//        log(sortedUsers, "Sorted");
+//        log(integerList, "RowSum");
     }
 }
