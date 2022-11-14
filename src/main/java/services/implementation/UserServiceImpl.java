@@ -26,9 +26,12 @@ public class UserServiceImpl implements UserService {
         List<Integer> integerList = sortedUsers.stream().map(user -> user.age + user.salary + user.height)
                 .collect(Collectors.toList());
 
-        log(users, "Original");
+        List<UserEntity> userEntities = sortedUsers.stream().filter(user -> user.age < 15).collect(Collectors.toList());
+
+
+//        log(users, "Original");
 //        log(filteredUsers, "Filtered");
-//        log(sortedUsers, "Sorted");
+        log(sortedUsers, "Sorted");
 //        log(integerList, "RowSum");
     }
 }

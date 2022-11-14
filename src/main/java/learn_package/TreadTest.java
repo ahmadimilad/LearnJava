@@ -7,8 +7,10 @@ package main.java.learn_package;
 class ThreadTestWithExtend extends Thread {
     public void run() {
         try {
-            Thread.sleep(5000);
-            System.out.println("ThreadTest");
+            for (int i = 0; i < 10; i++) {
+                Thread.sleep(1000);
+                System.out.println("ThreadTest");
+            }
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -19,8 +21,11 @@ class ThreadTestWithRunnable implements Runnable {
     @Override
     public void run() {
         try {
-            Thread.sleep(1000);
-            System.out.println("ThreadTestWithRunnable");
+            for (int i = 0; i < 10; i++) {
+                Thread.sleep(1000);
+                System.out.println("ThreadTestWithRunnable");
+            }
+
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -37,16 +42,21 @@ class ThreadTest {
         Thread threadTestWithRunnable = new Thread(new ThreadTestWithRunnable());
 
         threadTestWithExtend.start();
-        threadTestWithRunnable.start();
-
-        threadTestWithRunnable.setPriority(1);
-        threadTestWithExtend.setPriority(2);
-
         try {
-            // Wait to complete threadTestWithRunnable task and then go next execution
-            threadTestWithRunnable.join();
+            threadTestWithExtend.join(); // Waits for this thread to die
+            threadTestWithRunnable.start();
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
+
+        threadTestWithRunnable.setPriority(Thread.MIN_PRIORITY);
+        threadTestWithExtend.setPriority(Thread.MAX_PRIORITY);
+
+//        try {
+//            // Wait to complete threadTestWithRunnable task and then go next execution
+//            threadTestWithRunnable.join();
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
     }
 }
